@@ -77,6 +77,17 @@ public class FanDirectionButtons extends LinearLayout {
         mListener = listener;
     }
 
+    public void setFanDirection(int direction) {
+        resetFanToOff();
+        if (direction < FAN_DIRECTION_FACE || direction > FAN_DIRECTION_FLOOR_DEFROSTER) return;
+        for (ImageView v : mControlMap.keySet()) {
+            if (direction == mControlMap.get(v)) {
+                v.setImageDrawable(mFanMap.get(v).first);
+                v.setAlpha(SELECTED_BUTTON_ALPHA);
+            }
+        }
+    }
+
     private void init() {
         inflate(getContext(), R.layout.fan_direction, this);
     }
